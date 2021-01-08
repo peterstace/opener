@@ -9,7 +9,9 @@ import (
 )
 
 func main() {
-	log.Fatal(http.ListenAndServe(":4721", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	const addr = ":4721"
+	log.Printf("listening on %v", addr)
+	log.Fatal(http.ListenAndServe(addr, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		buf, err := ioutil.ReadAll(r.Body)
 		if err != nil {
 			http.Error(w, "could not read body: "+err.Error(), http.StatusInternalServerError)
